@@ -1,0 +1,61 @@
+;= @echo off
+;= Replace user_aliases.cmd with this file
+;= rem Call DOSKEY and use this file as the macrofile
+;= %SystemRoot%\system32\doskey /listsize=1000 /macrofile=%0%
+;= rem In batch mode, jump to the end of the file
+;= goto:eof
+;= Add aliases below here
+
+ls=ls --show-control-chars -F --color $*
+history=cat -n "%CMDER_ROOT%\config\.history"
+c=cls
+
+;= ------------------------------------------------
+;= Cmder
+;= ------------------------------------------------
+source=%CMDER_ROOT%\vendor\init.bat
+aliases=cat "%CMDER_ROOT%\config\user_aliases.cmd"  
+aliases-edit=code "%CMDER_ROOT%\config\user_aliases.cmd"  
+unalias=alias /d $1
+
+
+;= ------------------------------------------------
+;= File system
+;= ------------------------------------------------
+cmderr=cd /d "%CMDER_ROOT%"
+cdp=cd c:\p-dev  
+mkcd=mkdir $1 $t cd $1  
+cdd=cd c:/dev  
+cd=pushd $1
+cd-=popd
+pwd=cd
+...=cd ../..
+..=cd ..
+.=cd .
+
+;= ------------------------------------------------
+;= Git
+;= ------------------------------------------------
+gl=git log --oneline --all --graph --decorate  $*  
+gs=git status  
+ga=git add .  
+gcm=git commit -m $1  
+gcma=git commit --amend --no-edit  
+gp=git push
+npmg=npm list -g --depth=0  
+l=ls -lha  
+ll=ls -lha  
+gco=git checkout $*
+gd=git diff $1 
+glo=git log $1  
+gr=git restore $*
+gcob=git checkout -b $1
+gcb=git symbolic-ref --short HEAD
+glb=git for-each-ref --sort=-committerdate refs/heads/users/<> --count=15 --format=%(refname)
+
+
+;= ------------------------------------------------
+;= Apps shortcuts
+;= ------------------------------------------------
+e.=explorer .
+vi=vim $*
